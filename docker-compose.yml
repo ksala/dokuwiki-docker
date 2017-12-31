@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  dokuwiki:
+    image: dokuwiki-docker
+    restart: always
+    volumes:
+      - data:/dokuwiki/data
+      - plugins:/dokuwiki/lib/plugins
+      - config:/dokuwiki/config
+      - templates:/dokuwiki/lib/tpl
+    ports:
+      - 80:80
+
+volumes:
+  data:
+  plugins:
+  config:
+  templates:
