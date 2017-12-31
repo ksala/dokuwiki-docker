@@ -2,7 +2,7 @@ version: '3'
 
 services:
   dokuwiki:
-    image: dokuwiki-docker
+    image: ksala/dokuwiki:latest
     restart: always
     volumes:
       - data:/dokuwiki/data
