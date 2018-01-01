@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 
 services:
   dokuwiki:
@@ -10,7 +10,7 @@ services:
       - config:/dokuwiki/config
       - templates:/dokuwiki/lib/tpl
     ports:
-      - 80:80
+      - 127.0.0.1:9001:80
 
 volumes:
   data:
