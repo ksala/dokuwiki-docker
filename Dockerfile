@@ -1,7 +1,12 @@
-FROM alpine
+FROM alpine as builder
 
 ARG DOKUWIKI_VERSION=2017-02-19e
-# http://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz
+
+RUN wget -q -O /tmp/dokuwiki.tgz "https://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz" && \
+    mkdir dokuwiki && \
+    tar xvf /tmp/dokuwiki.tgz -C /dokuwiki --strip-components 1
+
+FROM alpine
 
 # Update
 RUN apk update && apk upgrade
@@ -9,12 +14,9 @@ RUN apk update && apk upgrade
 # Install PHP & nginx
 RUN apk add --no-cache php7 php7-fpm php7-session php7-xml php7-openssl php7-zip php7-zlib php7-gd nginx ca-certificates
 
-# Download DokuWiki to /dokuwiki
-RUN wget -q -O /tmp/dokuwiki.tgz "https://download.dokuwiki.org/src/dokuwiki/dokuwiki-$DOKUWIKI_VERSION.tgz" && \
-    mkdir dokuwiki && \
-    tar xvf /tmp/dokuwiki.tgz -C /dokuwiki --strip-components 1 && \
-    rm -f /tmp/dokuwiki.tgz && \
-    chown nginx:www-data -R /dokuwiki
+# Copy /dokuwiki and set the correct permissions
+COPY --from=builder /dokuwiki /dokuwiki
+RUN chown nginx:www-data -R /dokuwiki
 
 # Configure PHP
 ADD config/fpm.conf /etc/php7/php-fpm.d/doku.conf
