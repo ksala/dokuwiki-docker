@@ -1,5 +1,8 @@
 Simple Dockerfile for Dokuwiki, powered by Alpine Linux + nginx + PHP-FPM
 
+This image provide a nginx instance serving DokuWiki over plain-text on port 9001.  
+Remember to put a reverse proxy (another nginx instance is fine) in front of it to provide SSL, caching, rate-limiting and all that stuff!
+
 DockerHub: https://hub.docker.com/r/ksala/dokuwiki/
 
 NOTE: this image is not officially supported nor affiliated in any way with the DokuWiki project.
