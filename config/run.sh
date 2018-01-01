@@ -1,4 +1,6 @@
 #!/bin/sh
 
 php-fpm7
-nginx -g "daemon off;"
+nginx
+
+tail -q -F /var/log/nginx/* /var/log/php7/*
