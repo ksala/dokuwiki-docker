@@ -18,3 +18,7 @@ Note: By default this container will use port 9001, change this in the yml file
 `-v plugins:/dokuwiki/lib/plugins \`  
 `-v config:/dokuwiki/config \`  
 `-v templates:/dokuwiki/lib/tpl`  
+
+# Configuration
+Once the container is up you can connect to it by browsing `http://127.0.0.1:9001`  
+Go to `http://127.0.0.1:9001/install.php` to finish configuring DokuWiki
